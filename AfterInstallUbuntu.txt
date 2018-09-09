@@ -1,0 +1,556 @@
+===============================================
+
+sudo gedit /etc/UPower/UPower.conf
+Change to:
+ignoreLid=true
+
+===============================================
+
+http://howtoubuntu.org/things-to-do-after-installing-ubuntu-14-04-trusty-tahr
+
+echo "Downloading GetDeb and PlayDeb" &&
+wget http://archive.getdeb.net/install_deb/getdeb-repository_0.1-1~getdeb1_all.deb http://archive.getdeb.net/install_deb/playdeb_0.3-1~getdeb1_all.deb &&
+
+echo "Installing GetDeb" &&
+sudo dpkg -i getdeb-repository_0.1-1~getdeb1_all.deb &&
+
+echo "Installing PlayDeb" &&
+sudo dpkg -i playdeb_0.3-1~getdeb1_all.deb &&
+
+echo "Deleting Downloads" &&
+rm -f getdeb-repository_0.1-1~getdeb1_all.deb &&
+rm -f playdeb_0.3-1~getdeb1_all.deb
+
+sudo add-apt-repository -y ppa:videolan/stable-daily
+sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp
+sudo add-apt-repository -y ppa:webupd8team/java
+sudo add-apt-repository -y ppa:webupd8team/y-ppa-manager
+# sudo add-apt-repository -y ppa:gnome3-team/gnome3
+
+echo 'deb http://download.videolan.org/pub/debian/stable/ /' | sudo tee -a /etc/apt/sources.list.d/libdvdcss.list &&
+echo 'deb-src http://download.videolan.org/pub/debian/stable/ /' | sudo tee -a /etc/apt/sources.list.d/libdvdcss.list &&
+wget -O - http://download.videolan.org/pub/debian/videolan-apt.asc|sudo apt-key add -
+
+sudo apt update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+sudo apt install -y synaptic vlc gimp gimp-data gimp-plugin-registry gimp-data-extras y-ppa-manager bleachbit openjdk-7-jre oracle-java8-installer flashplugin-installer unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract file-roller libxine1-ffmpeg mencoder flac faac faad sox ffmpeg2theora libmpeg2-4 uudeview libmpeg3-1 mpeg3-utils mpegdemux liba52-dev mpeg2dec vorbis-tools id3v2 mpg321 mpg123 libflac++6 totem-mozilla icedax lame libmad0 libjpeg-progs libdvdcss2 libdvdread4 libdvdnav4 libswscale-extra-2 ubuntu-restricted-extras ubuntu-wallpapers*
+
+if [[ $(getconf LONG_BIT) = "64" ]]
+then
+	echo "64bit Detected" &&
+	echo "Installing Google Chrome" &&
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb &&
+	sudo dpkg -i google-chrome-stable_current_amd64.deb &&
+	rm -f google-chrome-stable_current_amd64.deb
+else
+	echo "32bit Detected" &&
+	echo "Installing Google Chrome" &&
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb &&
+	sudo dpkg -i google-chrome-stable_current_i386.deb &&
+	rm -f google-chrome-stable_current_i386.deb
+fi
+
+echo "Cleaning Up" &&
+sudo apt-get -f install &&
+sudo apt-get autoremove &&
+sudo apt-get -y autoclean &&
+sudo apt-get -y clean
+
+echo -e "\nexport PS1='\\u@\\h:\\W$ '" >> ~/.bashrc
+
+===============================================
+
+# Split termnal screen.
+# I don't like to much that, I need to research another option.
+sudo apt install screen
+
+===============================================
+
+# Color Calibratior
+sudo apt install redshift-gtk
+
+===============================================
+
+sudo apt install -y indicator-cpufreq indicator-multiload psensor gdebi shutter gnome-nettool youtube-dl filezilla git glmark2 mesa-utils
+# glmark2 # Ejecuta pruebas de benchmark a la tarjeta nVidia
+# nvidia-smi # Muestra informacion de la tarjeta nVidia
+# sudo apt install -y steam
+
+===============================================
+
+# Install Macbuntu: Mac OS X Yosemite Theme for Ubuntu 16.04 LTS Xenial Xerus
+# http://www.linuxslaves.com/2016/05/macbuntu-mac-os-x-yosmite-theme-for-ubuntu1604.html
+
+# Get Mac OS X Wallpaper
+# Apple Mac OS X Wallpaper Collection Pack.
+# http://www.linuxslaves.com/2015/07/download-mac-os-x-hd-pack-wallpaper.html
+
+sudo apt install unity-tweak-tool
+
+sudo add-apt-repository ppa:noobslab/macbuntu
+sudo apt update
+sudo apt install -y macbuntu-os-icons-lts-v7 macbuntu-os-ithemes-lts-v7
+# Open unity-tweak-tool -> Themes
+#   -> Themes -> Macbuntu-os
+#   -> Icons -> Macbuntu-os
+#   -> Cursor -> Mac-cursors
+
+#sudo apt install -y synapse
+sudo add-apt-repository ppa:noobslab/macbuntu
+sudo apt-get update
+sudo apt install -y albert
+
+sudo apt install -y plank
+sudo add-apt-repository ppa:noobslab/macbuntu
+sudo apt-get update
+sudo apt install -y macbuntu-os-plank-theme-lts-v7
+# 1. Open Plank from the dash.
+# 2. Press Ctrl + Right Click on the Plank
+# 3. Click Preferences
+# 4. Change the theme
+
+# Add Apple Mac OS Font- Helvetica
+# http://www.mediafire.com/download/mvv2hdzbx9a1o4d/Helvetica_-_Tiwo_Satriatama_%5Bwww.linuxslaves.com%5D.tar.gz
+# 1. Extract the package.
+# 2. Move Helvetica font to ~/.local/share/fonts.
+# 3. Open Unity Tweak Tool
+# 4. Click at Fonts on Appearance Group
+
+# Hide Ubuntu Launcher ( Left panel )
+# #sudo apt install -y compizconfig-settings-manager
+# #1. Open CCSM.
+# #3. Select "Desktop" -> "Ubuntu Unity Plugin" -> "Launcher"
+# #4. Turn the "Hide Launcher" from "Never" to "Autohide".
+# 5. Go to System Setting
+# 6. Open Appearance
+# 7. Click Behavior tabs
+# 8. Turn on Auto-hide the Launcher
+
+# Add in Startup Applications
+# Add: Albert Spotlight 
+# /usr/bin/albert
+# Add: Plank Dock
+# /usr/bin/plank
+
+# Reboot
+
+===============================================
+
+# Install NVIDIA
+# Not config this only if crash your video: https://ubuntuforums.org/showthread.php?t=1613132
+# http://tipsonubuntu.com/2016/11/19/nvidia-375-20-released-x-org-1-19-support-ubuntu-ppa/
+
+# https://developer.nvidia.com/cuda-downloads
+# https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda_8.0.44_linux-run
+# md5sum: 6dca912f9b7e2b7569b0074a41713640  cuda_8.0.44_linux.run
+# https://developer.nvidia.com/cuda-75-downloads-archive
+# http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda_7.5.18_linux.run
+# md5sum: 4b3bcecf0dfc35928a0898793cf3e4c6 cuda_7.5.18_linux.run
+
+sudo service lightdm stop
+sudo apt purge nvidia-*
+sudo add-apt-repository ppa:graphics-drivers/ppa && sudo apt update
+sudo apt install nvidia-375*
+sudo apt-get install mesa-common-dev
+sudo apt-get install freeglut3-dev
+sudo apt install nvidia-cuda-*
+sudo service lightdm start
+
+# Install CUDA
+# https://yangcha.github.io/GTX-1080/
+# http://textminingonline.com/dive-into-tensorflow-part-iii-gtx-1080-ubuntu16-04-cuda8-0-cudnn5-0-tensorflow
+# http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#runfile-installation
+sudo apt-get install linux-headers-$(uname -r)
+sudo ./cuda_8.0.44_linux.run --override
+# Add to file .bash_profile
+export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+# Remove CUDA
+sudo ./cuda_8.0.44_linux.run --uninstall -silent
+sudo /usr/local/cuda-8.0/bin/uninstall_cuda_8.0.pl -silent
+sudo rm -fR /usr/local/cuda*
+
+# Install cuDNN
+# https://developer.nvidia.com/rdp/cudnn-download
+tar xvzf cudnn-8.0-linux-x64-v5.1.tgz
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+
+
+===============================================
+
+# sudo apt install -y virtualbox virtualbox-guest-additions-iso
+# https://www.virtualbox.org/wiki/Linux_Downloads
+sudo apt update
+sudo apt install -y virtualbox-5.0 dkms
+
+===============================================
+
+https://www.spotify.com/mx/download/linux/
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt update
+sudo apt install -y spotify-client
+
+===============================================
+
+https://www.dropbox.com/
+israel.alberto.rv@gmail.com
+
+===============================================
+
+sudo apt install -y skype
+
+===============================================
+
+# Markdown Editor
+# Haroopad
+# http://pad.haroopress.com/
+
+===============================================
+
+#----------------------------------------------
+https://cjenkins.wordpress.com/2013/01/01/steam-for-linux-on-optimus-enabled-computer-running-ubuntu-12-04-64bits/
+#----------------------------------------------
+sudo add-apt-repository -y ppa:bumblebee/stable
+sudo add-apt-repository -y ppa:ubuntu-x-swat/x-updates
+sudo apt update
+sudo apt install -y bumblebee bumblebee-nvidia
+sudo apt install -y primus
+
+glxspheres64
+optirun glxspheres64
+vblank_mode=0 primusrun glxspheres64
+
+#----------------------------------------------
+#Configure Bumblebee and Primus in nVidia
+#http://www.webupd8.org/2012/12/use-nvidia-experimental-drivers-310.html
+#----------------------------------------------
+gksu gedit /etc/bumblebee/bumblebee.conf
+
+#KernelDriver=nvidia-current
+KernelDriver=nvidia-346
+
+#LibraryPath=/usr/lib/nvidia-current:/usr/lib32/nvidia-current
+LibraryPath=/usr/lib/nvidia-346:/usr/lib32/nvidia-346
+
+#XorgModulePath=/usr/lib/nvidia-current/xorg,/usr/lib/xorg/modules
+XorgModulePath=/usr/lib/nvidia-346/xorg,/usr/lib/xorg/modules
+
+sudo service bumblebeed restart
+
+gksudo gedit /etc/ld.so.conf.d/steam.conf
+Add:
+/usr/lib32
+/usr/lib/i386-linux-gnu/mesa
+
+sudo ldconfig
+sudo sh -c 'echo GLP_PREFIX=\"primusrun\" >> /etc/environment'
+sudo sh -c 'echo GLPV_PREFIX=\"vblank_mode=0 primusrun\" >> /etc/environment'
+sudo sh -c 'echo GLO_PREFIX=\"optirun\" >> /etc/environment'
+
+#REBOOT
+
+For each game you want to launch using you high powered nVidia card do:
+- Select a game from the Library page of the Steam client, right-click, and select Properties.
+- SET LAUNCH OPTIONS:$OPTIMUS_PREFIX %command%
+
+https://support.steampowered.com/kb_article.php?ref=6316-GJKC-7437
+
+===============================================
+
+WAKFU :: GAME
+sudo add-apt-repository -y ppa:ankama/updater
+sudo apt update
+sudo apt install ankama-transition wakfu
+sudo rm /usr/games/wakfu
+sudo ln -s /opt/ankama/wakfu/Wakfu /usr/games/wakfu
+
+===============================================
+
+sudo apt-get remove pipelight
+sudo apt-add-repository ppa:pipelight/stable
+sudo apt update
+sudo apt install --install-recommends pipelight-multi
+sudo pipelight-plugin --update
+sudo pipelight-plugin --enable silverlight
+sudo pipelight-plugin --enable widevine
+# sudo pipelight-plugin --enable flash
+# rm -rf ~/.wine-pipelight/ # If not work restart the browser
+
+sudo add-apt-repository -y ppa:mc3man/trusty-media
+sudo apt update
+sudo apt install gstreamer0.10-ffmpeg
+
+===============================================
+
+LINUX | APACHE, PHP, MYSQL, MYSQLADMIN
+-----------------------------------------------
+
+# https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-debian
+sudo apt install -y apache2
+sudo cp /etc/apache2/apache2.conf  /etc/apache2/apache2.bck.conf
+sudo bash
+sudo echo -e "\nServerName localhost" >> /etc/apache2/apache2.conf
+exit
+sudo apt install -y mysql-server
+sudo mysql_secure_installation
+sudo apt install -y php php-pear php-mysql libapache2-mod-php php-mcrypt
+# sudo apt install -y mysql-workbench
+sudo service apache2 restart
+sudo bash
+echo '<?php phpinfo(); ?>' > /var/www/html/info.php
+exit
+sudo apt install -y phpmyadmin apache2-utils
+#sudo bash
+#sudo echo -e "\nInclude /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf
+#exit
+sudo service apache2 restart
+
+sudo apt update
+sudo apt-get upgrade -y
+
+
+#---Extras---
+gksudo gedit /etc/apache2/mods-enabled/dir.conf
+# DirectoryIndex index.php index.html index.cgi index.pl index.php index.xhtml index.htm
+
+===============================================
+
+PYTHON :: INSTALL VIRTUALENVS
+-----------------------------------------------
+
+sudo apt install python-pip
+sudo pip install virtualenv
+mkdir ~/.virtualenvs
+sudo pip install virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+mkdir -p $WORKON_HOME
+sudo bash
+echo -e '\n. /usr/local/bin/virtualenvwrapper.sh' >> ~/.bashrc
+exit
+source /usr/local/bin/virtualenvwrapper.sh
+
+# Ejemplos
+mkvirtualenv django
+ls $WORKON_HOME
+pip install django
+lssitepackages
+
+mkvirtualenv flask
+ls $WORKON_HOME
+pip install flask
+workon flask
+lssitepackages
+echo $VIRTUAL_ENV
+
+rmvirtualenv django env2
+
+===============================================
+
+PYTHON :: PRUEBAS DE RENDIMIENTO
+-----------------------------------------------
+
+sudo apt install -y python-pycallgraph runsnakerun
+sudo apt install -y python-pip python-psutil python-numpy
+sudo apt install
+sudo pip install -U memory_profiler
+
+# To install line_profiler
+sudo apt install python-dev libxml2-dev libxslt-dev
+sudo pip install line_profiler
+
+
+http://stackoverflow.com/questions/582336/how-can-you-profile-a-python-script
+http://skipperkongen.dk/2012/03/05/quick-benchmarking-of-python-code-with-timeit/
+http://www.huyng.com/posts/python-performance-analysis/
+
+python -m cProfile find-friends.py
+python -m cProfile -s time find-friends.py
+time python find-friends.py
+
+kernprof -l -v find-friends.py
+python -m memory_profiler find-friends.py
+
+# http://www.graphviz.org/doc/info/output.html
+pycallgraph graphviz -o pycallgraph.png -- find-friends.py
+
+===============================================
+
+PYTHON | UPGRADE TO 2.7.10
+-----------------------------------------------
+http://tecadmin.net/install-python-2-7-on-ubuntu-and-linuxmint/
+
+sudo apt install -y build-essential checkinstall
+sudo apt install -y libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+
+cd /usr/src
+sudo wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
+sudo tar xzf Python-2.7.10.tgz
+cd Python-2.7.10
+sudo ./configure
+sudo make altinstall
+# make altinstall is used to prevent replacing the default python binary file /usr/bin/python.
+python2.7 -V
+
+cd /usr/local/bin/
+sudo cp python2.7 python
+sudo cp python2.7 python2
+python -V
+python2 -V
+
+===============================================
+
+ROVISOFT | JUSTHOST | SSH
+-----------------------------------------------
+https://my.justhost.com/cgi/help/ssh-keygen
+
+===============================================
+
+PYTHON | SERVIDOR JUSTHOST | ROVISOFT
+-----------------------------------------------
+https://my.justhost.com/cgi/help/python-install
+https://my.justhost.com/cgi/help/48#using
+https://forums.cpanel.net/threads/short-guide-to-running-python-scripts-with-cpanel.244361/
+http://webpython.codepoint.net/cgi_hello_world
+
+http://willhaley.com/blog/python-27-bluehost/
+http://willhaley.com/willhaley/blog/flask-on-bluehost/
+
+===============================================
+
+PYTHON | DJANGO | SERVIDOR JUSTHOST | ROVISOFT
+-----------------------------------------------
+http://flailingmonkey.com/install-django-justhost/
+
+===============================================
+
+PYTHON | RESTFUL FRAMEWORKS
+-----------------------------------------------
+http://www.fullstackpython.com/api-creation.html
+http://www.slideshare.net/postrational/scalable-web-application-architecture-presentation-25382089?next_slideshow=1
+http://www.slideshare.net/nicolaiarocci/developing-restful-web-apis-with-python-flask-and-mongodb?related=1
+
+===============================================
+
+PYTHON | FLASK RESTFUL
+-----------------------------------------------
+http://blog.luisrei.com/articles/flaskrest.html
+http://flask-restful.readthedocs.org/
+
+===============================================
+
+PYTHON | FLASK
+-----------------------------------------------
+# Ejemplo de Flask
+# http://code.tutsplus.com/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972
+
+sudo apt install -y libmysqlclient-dev python-dev python-mysqldb
+pip install flask
+pip install flask-mysql
+
+
+
+
+===============================================
+
+Win USB, create Boot USB Windows
+-----------------------------------------------
+sudo add-apt-repository -y ppa:colingille/freshlight
+sudo sh -c "sed -i 's/trusty/saucy/g' /etc/apt/sources.list.d/colingille-freshlight-trusty.list"
+sudo apt update
+sudo apt install winusb
+
+===============================================
+
+COMANDOS UTILES
+-----------------------------------------------
+
+sudo find ./ -type d -print -exec chmod 755 {} \;
+sudo find ./ -type f -print -exec chmod 664 {} \;
+
+du -h --max-depth=1 | sort -rh
+du | sort -nr
+df -h
+
+
+===============================================
+
+BLOGS UTILES
+-----------------------------------------------
+http://jorgegarciadev.tumblr.com/
+
+===============================================
+
+TEMPORAL
+-----------------------------------------------
+https://www.messenger.com/t/
+http://www.checkio.org/station/home/
+http://flask-restful.readthedocs.org/
+http://flask.pocoo.org/
+http://127.0.0.1:5000/todos
+http://project.rovisoft.net/python/todos
+
+israel.alberto.rv@gmail.com
+airv830830
+AirvZxf830830G99
+
+AirvZxf830830Lastpass
+
+Código de Vialidad: JALMX20391
+
+ssh rovisof1@rovisoft.net
+AirvZxf830830R9f
+/home4/rovisof1/public_html/project/flask
+/home4/rovisof1/myProjects/flask
+
+http://code.tutsplus.com/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972
+
+===============================================
+
+# Keyboard mapper for Joystick
+sudo apt install qjoypad
+
+sudo apt install build-essential
+sudo apt install libqt4-dev
+sudo apt install libxtst-dev
+sudo apt install g++
+
+# Execute command and then click in the controller icon.
+qjoypad --notray
+
+===============================================
+
+# Games
+
+0.A.D #Strategy
+Nethack #Dungeons, Strategy
+Pioneer #Galactic ships
+Star Commander #Galactic ships
+The Dark Mod #First person, Role
+
+Alien Isolation #First person, Shooting
+ARK: Survival Evolved #First person, Shooting
+Bioshock Infinite #First person, Shooting
+Cities Skylines #Simulation
+Counter Strike #First person, Shooting
+Dota 2 #RPB MMO
+Dying Light #First person, Zombies
+Firewatch #First person, Role
+Gone Home #First person, Mistery
+Hotline Miami 2 wrong number #Shootig, Arcade
+Legen of Grimrock #First person, Role
+Life is strange #Frist person, Role
+Shadowrun Return #RPG, Strategy
+SOMA #First person, Zombies
+Star Citizen #Galactic ships
+Shadow Warrior #First person, Shooting
+Tomb Raider #Frist person, Role
+Trine 2 #Adventure, 2D
+Wasteland 2 #RPG, Strategy
+We Happy Few #First person, Role
+Witcher 2 #First person, Role
+
